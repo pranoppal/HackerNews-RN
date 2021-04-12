@@ -1,0 +1,7 @@
+export {default as Splash } from './splash/splash'
+export {default as TopNewsList} from './topNews/topNewsList/topNewsList'
+export {default as TopNewsDetail} from './topNews/topNewsDetail/topNewsDetail'
+export {default as NewNewsList} from './newNews/newNewsList/newNewsList'
+export {default as NewNewsDetail} from './newNews/newNewsDetail/newNewsDetail'
+export {default as BestNewsList} from './bestNews/bestNewsList/bestNewsList'
+export {default as BestNewsDetail} from './bestNews/bestNewsDetail/bestNewsDetail'
