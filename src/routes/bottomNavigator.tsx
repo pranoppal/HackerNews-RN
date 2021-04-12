@@ -5,7 +5,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {createStackNavigator} from '@react-navigation/stack';
 import {colorPrimary} from '../utils/colors';
-import { TopNewsDetail, TopNewsList, BestNewsDetail, BestNewsList, NewNewsDetail, NewNewsList } from '../modules';
+import { TopNewsList, BestNewsList, NewNewsList } from '../modules';
 import { Image } from 'react-native';
 
 const Tab = createBottomTabNavigator();
@@ -66,10 +66,6 @@ export const TopNewsNavigator = (): React.ReactElement => {
   return (
     <TopNewsStack.Navigator headerMode="none">
       <TopNewsStack.Screen name="TopNewsList" component={TopNewsList} />
-      <TopNewsStack.Screen
-        name="TopNewsDetail"
-        component={TopNewsDetail}
-      />
     </TopNewsStack.Navigator>
   );
 };
@@ -80,10 +76,6 @@ export const NewNewsNavigator = (): React.ReactElement => (
     headerMode="none"
     initialRouteName="UserBookDesk">
     <NewNewsStack.Screen name="NewNewsList" component={NewNewsList} />
-    <NewNewsStack.Screen
-      name="NewNewsDetail"
-      component={NewNewsDetail}
-    />
   </NewNewsStack.Navigator>
 );
 
@@ -93,10 +85,6 @@ export const BestNewsNavigator = (): React.ReactElement => (
     <BestNewsStack.Screen
       name="BestNewsList"
       component={BestNewsList}
-    />
-    <BestNewsStack.Screen
-      name="BestNewsDetail"
-      component={BestNewsDetail}
     />
   </BestNewsStack.Navigator>
 );
