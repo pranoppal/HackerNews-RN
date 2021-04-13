@@ -1,12 +1,13 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {View} from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import Ionicons from 'react-native-vector-icons/Ionicons'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {createStackNavigator} from '@react-navigation/stack';
-import {colorPrimary} from '../utils/colors';
-import { TopNewsList, BestNewsList, NewNewsList } from '../modules';
-import { Image } from 'react-native';
+import {colorPrimary, colorWhite} from '../utils/colors';
+import { TopNewsList, BestNewsList, NewNewsList, AllProcess } from '../modules';
+import { CustomBottomTabBar } from '../commonComponents';
 
 const Tab = createBottomTabNavigator();
 
@@ -15,31 +16,70 @@ export const BottomNavigator = (): React.ReactElement => (
     tabBarOptions={{
       activeTintColor: colorPrimary,
       inactiveTintColor: '#A9A9A9',
-    }}>
+    }}
+    tabBar={(props) => (
+      <View
+          style={{
+              width: '100%',
+              height: 60,
+              position: 'absolute',
+              zIndex: 999,
+              bottom: 0,
+              backgroundColor:colorWhite,
+          }}
+      >
+          <CustomBottomTabBar {...props} />
+      </View>
+  )}
+    >
     <Tab.Screen
       name="TopNewsNavigator"
       component={TopNewsNavigator}
       options={{
-        tabBarLabel: 'Top',
+        tabBarLabel: 'Dashboard',
         tabBarIcon: ({color, focused}) => (
-          <Image
-            source={require('../assets/top.png')}
-            style={{width:24,height:24}}
-          />
+          <MaterialCommunityIcons name="view-dashboard" color={color} size={24} />
         ),
         tabBarAccessibilityLabel: 'TopNewsNavigator',
+      }}
+    />
+    <Tab.Screen
+      name="AllProcessNavigator"
+      component={AllProcessNavigator}
+      options={{
+        tabBarLabel: 'All Process',
+        tabBarIcon: ({color}) => (
+            <MaterialCommunityIcons name="folder" color={color} size={24} />
+        ),
+        tabBarAccessibilityLabel: 'AllProcessNavigator',
       }}
     />
     <Tab.Screen
       name="NewNewsNavigator"
       component={NewNewsNavigator}
       options={{
-        tabBarLabel: 'New',
+        tabBarLabel: 'New Instance',
         tabBarIcon: ({color}) => (
-            <Image
-            source={require('../assets/new.png')}
-            style={{width:24,height:24}}
-          />
+          <MaterialCommunityIcons
+          name="plus"
+          color={color}
+          size={26}
+      />
+        ),
+        tabBarAccessibilityLabel: 'NewNewsNavigator',
+      }}
+    />
+    <Tab.Screen
+      name="TestNewsNavigator"
+      component={NewNewsNavigator}
+      options={{
+        tabBarLabel: 'Notifications',
+        tabBarIcon: ({color}) => (
+          <MaterialIcons
+          name="notifications"
+          color={color}
+          size={26}
+      />
         ),
         tabBarAccessibilityLabel: 'NewNewsNavigator',
       }}
@@ -48,18 +88,26 @@ export const BottomNavigator = (): React.ReactElement => (
       name="BestNewsNavigator"
       component={BestNewsNavigator}
       options={{
-        tabBarLabel: 'Best',
+        tabBarLabel: 'Settings',
         tabBarIcon: ({color}) => (
-            <Image
-            source={require('../assets/best.png')}
-            style={{width:24,height:24}}
-          />
+            <Ionicons name="md-settings" color={color} size={24} />
         ),
         tabBarAccessibilityLabel: 'BestNewsNavigator',
       }}
     />
   </Tab.Navigator>
 );
+
+
+const AllProcessStack = createStackNavigator();
+export const AllProcessNavigator = (): React.ReactElement => {
+  return (
+    <AllProcessStack.Navigator headerMode="none">
+      <AllProcessStack.Screen name="AllProcess" component={AllProcess} />
+    </AllProcessStack.Navigator>
+  );
+};
+
 
 const TopNewsStack = createStackNavigator();
 export const TopNewsNavigator = (): React.ReactElement => {
